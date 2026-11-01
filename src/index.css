@@ -59,3 +59,8 @@
 @media print {
   .no-print { display: none !important; }
 }
+
+#netlify-deploy-badge,
+.powered-by-netlify {
+  display: none !important;
+}
