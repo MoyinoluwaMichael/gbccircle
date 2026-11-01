@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: theme('colors.slate.200');
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply font-sans antialiased text-slate-900 bg-white;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-200 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-300; }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
+
+/* ---- CSS variable shims for Radix/shadcn utilities ---- */
+:root {
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+  --muted: 241 245 249;
+  --muted-foreground: 100 116 139;
+  --border: 226 232 240;
+  --input: 226 232 240;
+  --ring: 13 148 136;
+  --radius: 0.5rem;
+  --card: 255 255 255;
+  --popover: 255 255 255;
+  --accent: 241 245 249;
+  --accent-foreground: 15 23 42;
+}
+
+/* These are used by Radix/shadcn components */
+.bg-background { background-color: white; }
+.bg-foreground { background-color: #0f172a; }
+.text-foreground { color: #0f172a; }
+.text-card-foreground { color: #0f172a; }
+.bg-card { background-color: white; }
+.bg-popover { background-color: white; }
+.text-popover-foreground { color: #0f172a; }
+.bg-muted { background-color: #f1f5f9; }
+.text-muted-foreground { color: #64748b; }
+.bg-accent { background-color: #f1f5f9; }
+.text-accent-foreground { color: #0f172a; }
+.bg-input { background-color: #e2e8f0; }
+.border-border { border-color: #e2e8f0; }
+.border-input { border-color: #e2e8f0; }
+.ring-offset-background { --tw-ring-offset-color: #ffffff; }
+.focus-visible\:ring-ring:focus-visible { --tw-ring-color: #0d9488; }
+
+@media print {
+  .no-print { display: none !important; }
 }

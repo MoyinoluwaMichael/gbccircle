@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# GBCcircle — Inventory & Sales Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-featured Inventory and Sales Management System built for a small business operating in a student environment in Nigeria. The app covers point-of-sale, stock management, device charging requests, staff management, and an owner backoffice — all in Nigerian Naira (₦).
 
-## Available Scripts
+> **Status:** UI complete with mock data. Convex backend integration is the next phase.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Owner Backoffice
+| Page | What it does |
+|---|---|
+| Dashboard | KPI cards, sales trend chart, top products, low-stock alerts |
+| Sales | Transaction list with staff/payment/status filters; record payments, cancel, process refunds |
+| Products | Product catalogue with category/stock filters; create, edit, activate/deactivate |
+| Categories | Category management with per-category product counts |
+| Inventory | Stock overview and movement history; manual stock adjustments |
+| Charging Requests | Device charging tracker with staff filter; view, edit, advance status |
+| Staff | Staff profiles with sales stats; create, edit, activate/deactivate |
+| Reports | Sales, staff performance, product, and charging analytics with charts |
+| Settings | Business details, inventory defaults, payment method toggles, receipt footer |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Staff POS
+| Page | What it does |
+|---|---|
+| New Sale | Product grid with category filters, cart, multi-payment-method checkout |
+| Charging Requests | Own requests; create new, edit details, advance status |
+| My Sales | Personal sales history |
+| Profile | Staff info and stats |
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build tool | Vite |
+| Styling | Tailwind CSS v3 |
+| UI primitives | Radix UI (shadcn/ui style) |
+| Routing | React Router v6 |
+| Charts | Recharts |
+| Date handling | date-fns |
+| Icons | Lucide React |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Install dependencies
+npm install
 
-### `npm run eject`
+# Start dev server
+npm run dev
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Type-check
+npm run type-check
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Production build
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The app runs at `http://localhost:5173` by default.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Demo Login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app ships with mock data and three demo accounts. Any password is accepted.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Role | Email |
+|---|---|
+| Owner | `owner@gbccircle.com` |
+| Staff — Chioma | `chioma@gbccircle.com` |
+| Staff — Tunde | `tunde@gbccircle.com` |
 
-### Code Splitting
+A demo mode banner is shown site-wide while `IS_DEMO = true` in `src/data/mock.ts`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+src/
+├── components/
+│   ├── layouts/        # BackofficeLayout, StaffLayout
+│   ├── shared/         # StatusBadge, StatCard, EmptyState, DemoBanner
+│   └── ui/             # Radix-based primitives (Button, Dialog, Select…)
+├── contexts/
+│   └── AuthContext.tsx # Mock auth with role-based route guards
+├── data/
+│   └── mock.ts         # All mock data and IS_DEMO flag
+├── lib/
+│   └── utils.ts        # formatCurrency (NGN), formatDate, cn…
+├── pages/
+│   ├── auth/           # LoginPage
+│   ├── backoffice/     # Owner pages
+│   └── staff/          # Staff POS pages
+└── types/
+    └── index.ts        # All entity types
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Roles & Routing
 
-### Advanced Configuration
+- `/backoffice/*` — Owner only (`OWNER` role)
+- `/staff/*` — Staff only (`STAFF` role)
+- Unauthenticated users are redirected to `/login`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Convex backend integration (database, real auth, real-time sync)
+- [ ] Receipt PDF generation
+- [ ] WhatsApp/SMS customer notifications
+- [ ] Multi-branch support

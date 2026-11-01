@@ -10,6 +10,13 @@
 
 # production
 /build
+/dist
+
+# IDE
+.idea/
+
+# PRD document
+*.docx
 
 # misc
 .DS_Store
